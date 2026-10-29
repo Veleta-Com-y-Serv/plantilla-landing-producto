@@ -1,0 +1,92 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: landing-producto
+nombre: Lanzamiento de producto
+descripcion: Web de un solo producto en color pleno y negro, con precio en portada, modelos, comparativa y compra.
+sectores:
+  - { id: producto, nombre: Producto }
+  - { id: lanzamiento, nombre: Lanzamiento }
+  - { id: marca, nombre: Marca propia }
+  - { id: tienda-online, nombre: Tienda online }
+  - { id: artesano-producto, nombre: Artesano con producto propio }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: caracteristicas, nombre: Características }
+  - { id: galeria, nombre: Galería }
+  - { id: variantes, nombre: Modelos y precios }
+  - { id: proceso, nombre: Cómo se usa }
+  - { id: comparativa, nombre: Comparativa }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: compra, nombre: Comprar }
+  - { id: contacto, nombre: Contacto }
+estilo: impactante
+plan_minimo: gratis
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-landing-producto.noexpertise.com
+activa: true
+orden: 460
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu producto"
+    pregunta: "¿Cómo se llama tu producto, qué tiene de especial y cuánto cuesta?"
+    ayuda: "Qué es, para quién es y por qué merece la pena. El precio, solo si quieres que salga en la portada."
+    tipo: texto
+    campos: [nombre, eslogan, seo.titulo, seo.descripcion, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.producto, secciones.hero.texto, secciones.hero.precio, secciones.hero.precio_nota]
+  - id: contacto
+    titulo: "Cómo te encuentran"
+    pregunta: "¿Dónde estáis y cómo os pueden llamar o escribir?"
+    ayuda: "Solo lo que quieras que vean tus clientes. Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.facebook]
+  - id: caracteristicas
+    titulo: "Lo que lo hace especial"
+    pregunta: "¿Qué tiene tu producto que no tengan los demás? Una idea por línea, con una frase que lo explique."
+    ayuda: "Materiales, cómo está hecho, qué consigue quien lo usa."
+    tipo: texto
+    campos: [secciones.caracteristicas.titulo, secciones.caracteristicas.texto, secciones.caracteristicas.caracteristicas]
+  - id: variantes
+    titulo: "Modelos y precios"
+    pregunta: "¿Tienes varios modelos, tamaños o packs? Nombre, para qué es cada uno y su precio. Uno por línea."
+    ayuda: "Si no quieres poner precios, déjalos vacíos. Puedes añadirlos luego en Contenido."
+    tipo: lista
+    campos: [secciones.variantes.variantes]
+  - id: proceso
+    titulo: "Cómo se usa"
+    pregunta: "¿Cómo se usa o se cuida tu producto? Cuéntalo en tres o cuatro pasos."
+    tipo: texto
+    campos: [secciones.proceso.titulo, secciones.proceso.texto, secciones.proceso.items]
+  - id: comparativa
+    titulo: "Comparativa"
+    pregunta: "¿Con qué lo compara la gente? Dime en qué se diferencia: para cada punto, cómo es el tuyo y cómo es el otro."
+    ayuda: "Escribe «sí» o «no» cuando sea una cosa que se tiene o no se tiene."
+    tipo: lista
+    campos: [secciones.comparativa.items]
+  - id: compra
+    titulo: "Dónde se compra"
+    pregunta: "¿Cómo se compra? ¿Tienes tienda online, lo vendes por WhatsApp o en tu local? ¿Envíos, devoluciones, garantía?"
+    tipo: texto
+    campos: [secciones.compra.titulo, secciones.compra.texto, secciones.compra.precio, secciones.compra.nota, secciones.compra.items]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan antes de comprar? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon la foto de portada de tu producto y, si quieres, las de detalle, los modelos y la galería."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.caracteristicas.imagen, secciones.galeria.galeria, secciones.proceso.imagen, secciones.compra.imagen]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige el color de tu marca y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

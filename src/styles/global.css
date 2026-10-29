@@ -1,0 +1,118 @@
+/* Lanzamiento de producto — estilo impactante: un solo producto, color pleno de marca + negro.
+   Bandas a sangre que alternan negro (fondo), hueso (texto invertido) y color pleno (primario), titulares en
+   mayúsculas muy pesadas, el nombre del producto gigante y hueco, ficha técnica en monoespaciada,
+   botones rectos con flecha y fotos a sangre. Colores: los cuatro de site.yaml; la letra sobre el primario y
+   el acento la calcula Base.astro (--c-sobre-primario, --c-sobre-acento). */
+@import "tailwindcss";
+@import "./comun.css";
+@config "../../tailwind.config.mjs";
+
+:root {
+  --fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fuente-titulos: "Franklin Gothic Heavy", "Franklin Gothic Demi", "Segoe UI Black", "Helvetica Neue", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --fuente-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radio: 0; --ritmo: 4.5rem; --ritmo-md: 8rem; --ancho: 90rem;
+  --alto-cabecera: 4.5rem;
+  --linea: color-mix(in srgb, currentColor 18%, transparent);
+  --primario-hondo: color-mix(in srgb, var(--c-primario) 82%, var(--c-fondo));
+}
+
+@layer base {
+  html { scroll-padding-top: var(--alto-cabecera); }
+  body { font-family: var(--fuente-texto); font-size: 1.0625rem; line-height: 1.6; background: var(--c-fondo); }
+  h1, h2, h3 { font-family: var(--fuente-titulos); font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.92; }
+  :focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+}
+
+@layer components {
+  /* Bandas a todo el ancho */
+  .banda-negra { background: var(--c-fondo); color: var(--c-texto); }
+  .banda-hueso { background: var(--c-texto); color: var(--c-fondo); }
+  .banda-color { background: var(--c-primario); color: var(--c-sobre-primario); }
+  .contenedor-ancho { width: 100%; max-width: var(--ancho); margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 768px) { .contenedor-ancho { padding-inline: 2.5rem; } }
+  /* Mitad de una fila 50/50 a sangre: el texto se alinea con el borde del contenedor ancho */
+  .medio-dcha, .medio-izq { padding-inline: 1rem; }
+  @media (min-width: 768px) { .medio-dcha, .medio-izq { padding-inline: 2.5rem; } }
+  @media (min-width: 1024px) {
+    .medio-dcha { padding-left: 4rem; padding-right: max(2.5rem, calc((100vw - var(--ancho)) / 2 + 2.5rem)); }
+    .medio-izq { padding-right: 4rem; padding-left: max(2.5rem, calc((100vw - var(--ancho)) / 2 + 2.5rem)); }
+  }
+
+  /* Antetítulo: monoespaciada en mayúsculas con una raya de color delante */
+  .antetitulo { display: inline-flex; align-items: center; gap: .75rem; font-family: var(--fuente-mono); font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  .antetitulo::before { content: ""; width: 2.25rem; height: 3px; background: var(--c-primario); flex: none; }
+  .banda-hueso .antetitulo::before { background: var(--c-acento); }
+  .banda-color .antetitulo::before { background: currentColor; }
+  .mono { font-family: var(--fuente-mono); letter-spacing: .04em; }
+
+  .titulo-seccion { font-size: clamp(2.5rem, 7.2vw, 6.25rem); margin-top: 1rem; }
+  .titulo-medio { font-size: clamp(2.1rem, 5vw, 4.25rem); }
+  .titular { max-width: 64rem; margin-bottom: 3rem; }
+  .titular--centro { margin-inline: auto; text-align: center; }
+  .titular-texto { margin-top: 1.25rem; font-size: 1.15rem; max-width: 40rem; opacity: .78; }
+  /* Texto hueco (solo el contorno) para el nombre gigante del producto y los números */
+  .hueco { color: transparent; -webkit-text-stroke: 2px currentColor; paint-order: stroke fill; }
+  @supports not (-webkit-text-stroke: 1px black) { .hueco { color: inherit; opacity: .3; } }
+  .resalte { color: var(--c-primario); }
+  .banda-hueso .resalte { color: var(--c-acento); }
+  .banda-color .resalte { color: inherit; text-decoration: underline; text-decoration-thickness: .08em; text-underline-offset: .12em; }
+
+  /* Botones rectos, en mayúsculas, con flecha */
+  .btn, .btn-sec { min-height: 3rem; padding-inline: 1.5rem; border-radius: 0; font-family: var(--fuente-mono); font-weight: 800; font-size: .86rem; letter-spacing: .1em; text-transform: uppercase; border: 2px solid transparent; }
+  .btn { background: var(--c-primario); color: var(--c-sobre-primario); border-color: var(--c-primario); }
+  .btn:hover { background: transparent; color: var(--c-primario); }
+  .btn-sec { border-color: currentColor; color: inherit; background: transparent; }
+  .btn-sec:hover { background: color-mix(in srgb, currentColor 14%, transparent); }
+  /* En la banda de color, el botón principal va en negro (fondo) */
+  .banda-color .btn { background: var(--c-fondo); color: var(--c-texto); border-color: var(--c-fondo); }
+  .banda-color .btn:hover { background: transparent; color: var(--c-sobre-primario); border-color: currentColor; }
+  /* En la banda hueso, el botón principal va en negro (fondo) */
+  .banda-hueso .btn { background: var(--c-fondo); color: var(--c-texto); border-color: var(--c-fondo); }
+  .banda-hueso .btn:hover { background: transparent; color: var(--c-fondo); }
+  .btn-flecha { display: inline-block; transition: transform .15s ease; }
+  .btn:hover .btn-flecha, .btn-sec:hover .btn-flecha { transform: translateX(4px); }
+
+  /* Cabecera fija a todo el ancho: sólida en negro; transparente encima del hero mientras no se baja */
+  .cabecera--lanzamiento { position: sticky; top: 0; background: var(--c-fondo); color: var(--c-texto); border-bottom: 1px solid color-mix(in srgb, var(--c-texto) 14%, transparent); transition: background-color .25s ease, border-color .25s ease; }
+  .cabecera--lanzamiento .cabecera-fila { min-height: var(--alto-cabecera); max-width: var(--ancho); }
+  .cabecera--lanzamiento.transparente { background: transparent; border-bottom-color: transparent; }
+  .cabecera--lanzamiento.transparente::before { content: ""; position: absolute; inset: 0 0 -2rem; background: linear-gradient(to bottom, color-mix(in srgb, var(--c-fondo) 70%, transparent), transparent); pointer-events: none; z-index: -1; }
+  .cabecera--lanzamiento .marca-inicial { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; background: var(--c-primario); color: var(--c-sobre-primario); font-family: var(--fuente-titulos); font-weight: 900; font-size: 1.2rem; }
+  .cabecera--lanzamiento .marca-nombre { font-family: var(--fuente-titulos); font-weight: 900; text-transform: uppercase; letter-spacing: .02em; font-size: 1.1rem; }
+  .cabecera--lanzamiento .cabecera-nav { gap: 1.75rem; }
+  .cabecera--lanzamiento .cabecera-nav a { font-family: var(--fuente-mono); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .8; padding-block: .5rem; border-bottom: 2px solid transparent; }
+  .cabecera--lanzamiento .cabecera-nav a:hover { opacity: 1; border-bottom-color: var(--c-primario); }
+  .cabecera--lanzamiento .cabecera-cta { min-height: 2.75rem; }
+  .cabecera--lanzamiento .menu-movil summary { min-height: 2.75rem; padding-inline: .9rem; border: 2px solid currentColor; font-family: var(--fuente-mono); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+  .cabecera--lanzamiento .menu-movil-panel { background: var(--c-fondo); padding: 1rem 1rem 1.5rem; border-bottom: 3px solid var(--c-primario); }
+  .cabecera--lanzamiento .menu-movil-panel a:not(.btn) { font-family: var(--fuente-titulos); font-weight: 900; text-transform: uppercase; font-size: 1.5rem; padding-block: .8rem; }
+  @media (min-width: 900px) and (max-width: 1099px) {
+    .cabecera--lanzamiento .cabecera-nav { display: none; }
+    .cabecera--lanzamiento .menu-movil { display: block; }
+  }
+
+  /* Pie */
+  .pie--lanzamiento { background: var(--c-fondo); color: var(--c-texto); border-top: 1px solid color-mix(in srgb, var(--c-texto) 14%, transparent); padding-top: 4rem; overflow: hidden; }
+  .pie--lanzamiento .pie-rejilla { max-width: var(--ancho); }
+  @media (min-width: 768px) { .pie--lanzamiento .pie-rejilla { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .pie--lanzamiento .pie-rejilla { grid-template-columns: 1.6fr 1fr 1fr 1fr; } }
+  .pie--lanzamiento .pie-nombre { font-family: var(--fuente-titulos); font-weight: 900; text-transform: uppercase; font-size: 1.6rem; line-height: 1; }
+  .pie--lanzamiento .pie-titulo { font-family: var(--fuente-mono); letter-spacing: .16em; opacity: .7; }
+  .pie--lanzamiento .pie-legal { max-width: var(--ancho); font-family: var(--fuente-mono); font-size: .76rem; letter-spacing: .04em; }
+  .pie-gigante { font-family: var(--fuente-titulos); font-weight: 900; text-transform: uppercase; line-height: .8; letter-spacing: -0.03em; white-space: nowrap; overflow: hidden; text-overflow: clip; color: var(--c-primario); margin-top: 3rem; padding-inline: 1rem; }
+  @media (min-width: 768px) { .pie-gigante { padding-inline: 2.5rem; } }
+  .contenedor { max-width: var(--ancho); }
+  @media (min-width: 768px) { .contenedor { padding-inline: 2.5rem; } }
+
+  /* Formulario sobre fondo negro u hueso */
+  .campo label { font-family: var(--fuente-mono); font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+  .campo input, .campo textarea { border-radius: 0; border: 0; border-bottom: 2px solid color-mix(in srgb, currentColor 40%, transparent); padding-inline: 0; font-size: 1.1rem; }
+  .campo input:focus, .campo textarea:focus { outline: none; border-bottom-color: var(--c-primario); }
+  .banda-hueso .campo input:focus, .banda-hueso .campo textarea:focus { border-bottom-color: var(--c-acento); }
+  .campo-check input { accent-color: var(--c-primario); }
+
+  /* Acordeón sin marcador */
+  .faq summary { list-style: none; cursor: pointer; }
+  .faq summary::-webkit-details-marker { display: none; }
+}

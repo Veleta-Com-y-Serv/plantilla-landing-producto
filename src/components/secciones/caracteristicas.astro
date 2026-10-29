@@ -1,0 +1,92 @@
+---
+// Características: banda negra con titular enorme y texto a la derecha; debajo, las características en una
+// rejilla de 1, 2 o 4 columnas separadas por líneas finas (sin tarjetas), con número e icono en el color de marca.
+// Cierra con una fila 50/50 a sangre: la foto de detalle (`imagen`) toca el borde izquierdo y la ficha técnica
+// (`ficha[]`: titulo = dato, texto = valor; `titulo_ficha` opcional) va en un bloque de color pleno hasta el
+// borde derecho. Sin foto, la ficha ocupa todo el ancho; sin ficha, la foto es una franja a sangre.
+import { seccion, campo } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const lista = s ? s.caracteristicas.filter((c) => c && c.titulo) : [];
+const ficha = s ? s.ficha.filter((f) => f && f.titulo) : [];
+const tituloFicha = campo(s?.titulo_ficha);
+const columnas = lista.length >= 4 ? 'sm:grid-cols-2 xl:grid-cols-4' : lista.length === 3 ? 'md:grid-cols-3' : lista.length === 2 ? 'sm:grid-cols-2' : '';
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-negra">
+      <div class="contenedor-ancho seccion">
+        {(s.antetitulo || s.titulo || s.texto) && (
+          <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+            <div class="lg:col-span-8">
+              {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+              {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+            </div>
+            {s.texto && <p class="text-lg opacity-80 lg:col-span-4 md:text-xl">{s.texto}</p>}
+          </div>
+        )}
+        {lista.length > 0 && (
+          <ul class:list={['carac-rejilla mt-14 grid md:mt-20', columnas]}>
+            {lista.map((c, i) => (
+              <li class="carac">
+                <div class="flex items-center justify-between gap-4">
+                  <span class="mono text-sm font-bold opacity-60">{String(i + 1).padStart(2, '0')}</span>
+                  {c.icono && (
+                    <span class="grid h-12 w-12 shrink-0 place-items-center bg-primario text-[var(--c-sobre-primario)]">
+                      <Icono nombre={c.icono} tam={26} />
+                    </span>
+                  )}
+                </div>
+                <h3 class="mt-6 text-[1.7rem] md:mt-10 md:text-[2rem]">{c.titulo}</h3>
+                {c.texto && <p class="mt-4 opacity-75">{c.texto}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      {(s.imagen || ficha.length > 0) && (
+        <div class:list={['grid', { 'lg:grid-cols-2': s.imagen && ficha.length > 0 }]}>
+          {s.imagen && (
+            <Imagen
+              src={s.imagen}
+              alt={altSeccion(s)}
+              ancho={1400}
+              alto={1000}
+              class:list={['w-full object-cover', ficha.length > 0 ? 'aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[38rem]' : 'aspect-[16/9] md:aspect-[21/8]']}
+            />
+          )}
+          {ficha.length > 0 && (
+            <div class="banda-color flex items-center">
+              <div class:list={['w-full py-14 md:py-20', s.imagen ? 'medio-dcha' : 'contenedor-ancho']}>
+                {tituloFicha && <h3 class="text-[clamp(2rem,4vw,3.5rem)]">{tituloFicha}</h3>}
+                <dl class:list={['mono mt-8 grid', { 'md:grid-cols-2 md:gap-x-12': !s.imagen }]}>
+                  {ficha.map((f) => (
+                    <div class="ficha-fila flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4">
+                      <dt class="text-xs font-bold uppercase tracking-[.14em] opacity-75">{f.titulo}</dt>
+                      {f.texto && <dd class="text-right text-lg font-bold md:text-xl">{f.texto}</dd>}
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .carac-rejilla { border-top: 1px solid var(--linea); }
+  .carac { padding: 2rem 0; border-bottom: 1px solid var(--linea); }
+  @media (min-width: 640px) {
+    .carac-rejilla { border-left: 1px solid var(--linea); }
+    .carac { padding: 2.25rem 1.75rem 2.5rem; border-right: 1px solid var(--linea); }
+  }
+  .ficha-fila { border-bottom: 2px solid color-mix(in srgb, currentColor 30%, transparent); }
+  .ficha-fila:first-child { border-top: 2px solid currentColor; }
+</style>

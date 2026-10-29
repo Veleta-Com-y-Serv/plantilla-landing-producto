@@ -1,0 +1,70 @@
+---
+// Compra: banda de color pleno, fila 50/50 a sangre. A la izquierda, titular enorme, precio gigante (`precio`),
+// texto, los dos botones (`cta`: tienda online u otra web; `cta_secundario`: WhatsApp u otro destino), una nota
+// (`nota`) y las garantías (`items[]`: titulo, icono) en fila; a la derecha, la foto (`imagen`) hasta el borde.
+// Sin botones de la sección, el botón va al WhatsApp del negocio si lo hay. Sin foto, todo a un ancho.
+import { seccion, site, campo, boton, externo, whatsapp } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const principal = boton(s?.cta);
+const secundario = boton(s?.cta_secundario);
+const wa = whatsapp(site.contacto.whatsapp);
+const botones = [principal, secundario].filter(Boolean) as { texto: string; url: string }[];
+if (!botones.length && wa) botones.push({ texto: campo(s?.cta?.texto) || 'WhatsApp', url: wa });
+const garantias = s ? s.items.filter((g) => g && g.titulo) : [];
+const precio = campo(s?.precio);
+const nota = campo(s?.nota);
+const enlace = (url: string) => (externo(url) ? { rel: 'noopener', target: '_blank' } : {});
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-color overflow-hidden">
+      <div class:list={['grid', { 'lg:grid-cols-2': s.imagen }]}>
+        <div class:list={['seccion flex flex-col justify-center', s.imagen ? 'medio-izq lg:order-1' : 'contenedor-ancho']}>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="compra-titulo">{s.titulo}</h2>}
+          {precio && <p class="compra-precio">{precio}</p>}
+          {s.texto && <p class="mt-6 max-w-xl text-lg font-medium opacity-90 md:text-xl">{s.texto}</p>}
+          {botones.length > 0 && (
+            <div class="mt-9 flex flex-wrap gap-3">
+              {botones.map((b, i) => (
+                <a class={i === 0 ? 'btn' : 'btn-sec'} href={b.url} {...enlace(b.url)}>
+                  {b.texto}{i === 0 && <span class="btn-flecha" aria-hidden="true">→</span>}
+                </a>
+              ))}
+            </div>
+          )}
+          {nota && <p class="mono mt-5 max-w-xl text-sm opacity-80">{nota}</p>}
+          {garantias.length > 0 && (
+            <ul class="garantias mt-12 grid sm:grid-cols-3">
+              {garantias.map((g) => (
+                <li class="flex items-center gap-3 py-4 sm:flex-col sm:items-start sm:pr-4">
+                  <Icono nombre={g.icono} tam={28} class="shrink-0" />
+                  <span class="font-bold leading-tight">{g.titulo}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        {s.imagen && (
+          <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1200} class="aspect-[4/3] w-full object-cover md:aspect-[16/10] lg:order-2 lg:aspect-auto lg:h-full lg:min-h-[46rem]" />
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .compra-titulo { font-size: clamp(2.8rem, 8vw, 7.5rem); margin-top: 1rem; }
+  .compra-precio { font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(4.5rem, 12vw, 10rem); line-height: .85; letter-spacing: -0.04em; margin-top: 1.5rem; }
+  .garantias { border-top: 2px solid currentColor; }
+  .garantias li + li { border-top: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+  @media (min-width: 640px) {
+    .garantias li { padding-top: 1.25rem; }
+    .garantias li + li { border-top: 0; }
+  }
+</style>

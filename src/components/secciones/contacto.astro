@@ -1,0 +1,48 @@
+---
+// Contacto: banda partida a sangre. Mitad hueso con el titular y el contacto directo en grande (teléfono,
+// WhatsApp, correo, dirección y horario); mitad negra con el formulario (mailto). En móvil, una debajo de otra.
+import { seccion, site, tel, whatsapp, mapa } from '../../data/site';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="grid lg:grid-cols-2">
+      <div class="banda-hueso medio-izq seccion">
+        {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+        {s.titulo && <h2 class="titulo-medio mt-4">{s.titulo}</h2>}
+        {s.texto && <p class="titular-texto">{s.texto}</p>}
+        <ul class="contacto-lista mt-10">
+          {c.telefono && (
+            <li><a class="contacto-grande" href={tel(c.telefono)}><Icono nombre="telefono" tam={28} class="shrink-0" />{c.telefono}</a></li>
+          )}
+          {c.whatsapp && (
+            <li><a class="contacto-fila" href={whatsapp(c.whatsapp)} rel="noopener" target="_blank"><Icono nombre="whatsapp" class="shrink-0" />WhatsApp</a></li>
+          )}
+          {c.email && (
+            <li><a class="contacto-fila break-all" href={`mailto:${c.email}`}><Icono nombre="correo" class="shrink-0" />{c.email}</a></li>
+          )}
+          {c.direccion && (
+            <li><a class="contacto-fila" href={mapa(c.direccion)} rel="noopener" target="_blank"><Icono nombre="mapa" class="shrink-0" />{c.direccion}</a></li>
+          )}
+          {c.horario && <li class="contacto-fila"><Icono nombre="reloj" class="shrink-0" />{c.horario}</li>}
+        </ul>
+      </div>
+      <div class="banda-negra medio-dcha seccion">
+        <FormularioContacto boton="Enviar" class="max-w-xl" />
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .contacto-lista { border-top: 2px solid currentColor; }
+  .contacto-lista li { border-bottom: 1px solid var(--linea); }
+  .contacto-grande { display: flex; align-items: center; gap: .9rem; padding-block: 1.1rem; font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(1.7rem, 4vw, 2.75rem); line-height: 1; text-decoration: none; }
+  .contacto-fila { display: flex; align-items: center; gap: .9rem; min-height: 3.25rem; padding-block: .7rem; font-size: 1.05rem; text-decoration: none; }
+  a.contacto-fila:hover, .contacto-grande:hover { color: var(--c-acento); }
+</style>

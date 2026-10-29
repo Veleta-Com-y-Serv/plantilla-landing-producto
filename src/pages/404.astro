@@ -1,0 +1,16 @@
+---
+// Página no encontrada con el diseño de la plantilla: banda negra a pantalla casi completa, «404» gigante y hueco.
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="banda-negra relative overflow-hidden">
+    <div class="contenedor-ancho flex min-h-[78svh] flex-col justify-center py-24">
+      <p class="antetitulo">Error 404</p>
+      <h1 class="titulo-seccion">Esta página no existe</h1>
+      <p class="mt-6 max-w-xl text-lg opacity-80">Puede que el enlace esté mal o que la página se haya movido.</p>
+      <p class="mt-10"><a class="btn" href="/">Volver al inicio<span class="btn-flecha" aria-hidden="true">→</span></a></p>
+    </div>
+    <p class="hueco pointer-events-none absolute right-0 bottom-0 translate-y-[12%] pr-4 font-display text-[clamp(8rem,34vw,30rem)] leading-none font-black opacity-40" aria-hidden="true">404</p>
+  </section>
+</Base>

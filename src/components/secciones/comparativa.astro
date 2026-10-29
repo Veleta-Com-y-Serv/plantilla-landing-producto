@@ -1,0 +1,78 @@
+---
+// Comparativa: banda negra con una tabla a todo el ancho del contenedor. Columnas: lo que se compara
+// (`items[].titulo`), tu producto (`items[].propio`, columna resaltada en el color de marca) y la alternativa
+// (`items[].otros`). «sí» y «no» se pintan como marca y aspa; cualquier otro texto, tal cual. Cabeceras de las
+// dos columnas: `columna_propia` y `columna_otros`. Sin elementos, solo el titular.
+import { seccion, campo, siNo } from '../../data/site';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const filas = s ? s.items.filter((f) => f && f.titulo) : [];
+const propia = campo(s?.columna_propia);
+const otros = campo(s?.columna_otros);
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-negra">
+      <div class="contenedor-ancho seccion">
+        <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+          <div class="lg:col-span-8">
+            {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+            {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          </div>
+          {s.texto && <p class="text-lg opacity-80 lg:col-span-4 md:text-xl">{s.texto}</p>}
+        </div>
+        {filas.length > 0 && (
+          <table class="comparativa mt-14 w-full md:mt-20">
+            {(propia || otros) && (
+              <thead>
+                <tr>
+                  <td />
+                  <th scope="col" class="col-propia cabeza">{propia}</th>
+                  <th scope="col" class="cabeza">{otros}</th>
+                </tr>
+              </thead>
+            )}
+            <tbody>
+              {filas.map((f) => (
+                <tr>
+                  <th scope="row">{f.titulo}</th>
+                  {[f.propio, f.otros].map((v, j) => {
+                    const sn = siNo(v);
+                    return (
+                      <td class:list={{ 'col-propia': j === 0 }}>
+                        {sn === true ? (
+                          <span class="inline-flex items-center gap-2"><Icono nombre="check" tam={32} class="marca-si" /><span class="sr-only">Sí</span></span>
+                        ) : sn === false ? (
+                          <span class="inline-flex items-center gap-2 opacity-60"><Icono nombre="cruz" tam={22} /><span class="sr-only">No</span></span>
+                        ) : (
+                          campo(v)
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .comparativa { border-collapse: collapse; table-layout: fixed; }
+  .comparativa th, .comparativa td { text-align: left; vertical-align: middle; padding: 1rem .6rem; border-bottom: 1px solid var(--linea); }
+  .comparativa tbody th { font-family: var(--fuente-titulos); font-weight: 900; text-transform: uppercase; font-size: clamp(.95rem, 2.2vw, 1.6rem); line-height: 1.05; width: 38%; }
+  .comparativa tbody td { font-family: var(--fuente-mono); font-weight: 700; font-size: clamp(.8rem, 1.6vw, 1.05rem); }
+  .comparativa .cabeza { font-family: var(--fuente-mono); font-size: clamp(.68rem, 1.4vw, .85rem); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding-block: 1.1rem; }
+  .comparativa .col-propia { background: color-mix(in srgb, var(--c-primario) 16%, var(--c-fondo)); }
+  .comparativa thead .col-propia { background: var(--c-primario); color: var(--c-sobre-primario); }
+  .comparativa .marca-si { color: var(--c-primario); }
+  @media (min-width: 768px) {
+    .comparativa th, .comparativa td { padding: 1.5rem 1.5rem; }
+    .comparativa tbody th { padding-left: 0; }
+  }
+</style>

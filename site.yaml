@@ -1,0 +1,166 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Landing de un solo producto: el menú apunta a anclas (#id-de-sección).
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+nombre: Forja Tajo
+eslogan: Cuchillos de cocina forjados a mano en Toledo, para toda la vida.
+sector: producto
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre en texto.
+colores:
+  primario: "#19e0c5"   # verde agua eléctrico: bandas de color pleno, botones, sello del precio, cinta
+  acento: "#0b7d70"     # verde agua hondo: detalles sobre las bandas hueso (rayas, números, comillas)
+  fondo: "#0b0c0c"      # negro: bandas oscuras, cabecera y pie (con fondo claro el diseño también funciona)
+  texto: "#f2efe8"      # hueso: letra sobre negro y fondo de las bandas claras
+contacto:
+  telefono: "925 63 41 07"
+  email: hola@forjatajo.es
+  direccion: "Calle de la Plata 14, 45001 Toledo"
+  horario: "Lunes a sábado, de 10:00 a 14:00 y de 17:00 a 20:00."
+  whatsapp: "+34 644 21 37 90"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: ""
+  linkedin: ""
+menu:
+  - { texto: El cuchillo, url: "/#caracteristicas" }
+  - { texto: Modelos, url: "/#variantes" }
+  - { texto: Cómo se usa, url: "/#proceso" }
+  - { texto: Comparativa, url: "/#comparativa" }
+  - { texto: Preguntas, url: "/#preguntas" }
+boton_cabecera: { texto: "Comprar · 149 €", url: "/#compra" }
+seo:
+  titulo: "Tajo 21 · Cuchillo de chef forjado a mano en Toledo"
+  descripcion: "Cuchillo de chef de 21 cm forjado a mano en Toledo, con hoja de acero inoxidable y mango de olivo. Envío en 48 horas y garantía de por vida."
+  tipo: Store
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: "Nuevo · Forjado a mano en Toledo"
+    titulo: Un cuchillo para toda la vida.
+    producto: Tajo 21                # nombre del producto: sale gigante y hueco al pie de la portada
+    texto: "Acero inoxidable forjado y templado a mano en nuestro taller del casco antiguo. Corta como el primer día durante años y se afila en dos minutos."
+    precio: "149 €"
+    precio_nota: "IVA incluido · envío gratis"
+    imagen: /fotos/hero.jpg
+    cta: { texto: Comprar ahora, url: "/#compra" }
+    cta_secundario: { texto: Ver cómo está hecho, url: "/#caracteristicas" }
+    items:                           # la cinta que se desliza bajo la portada
+      - { titulo: Forjado a mano }
+      - { titulo: Hecho en Toledo }
+      - { titulo: Garantía de por vida }
+      - { titulo: Envío en 48 horas }
+      - { titulo: Afilado gratis el primer año }
+
+  caracteristicas:
+    activa: true
+    antetitulo: El cuchillo
+    titulo: Pensado para cortar. Hecho para durar.
+    texto: "Cada cuchillo pasa por las manos de tres artesanos y por once pasos antes de salir del taller. Ninguno es igual a otro."
+    imagen: /fotos/detalle-hoja.jpg
+    caracteristicas:
+      - { titulo: Acero forjado a mano, texto: "Acero inoxidable forjado en caliente y templado a mano. Más duro y más fino: aguanta el filo mucho más tiempo.", icono: llama }
+      - { titulo: Filo a 15 grados, texto: "Afilado a mano en piedra al agua. Corta un tomate maduro sin aplastarlo y lamina la cebolla como papel.", icono: cuchillo }
+      - { titulo: Mango de olivo, texto: "Madera de olivo estabilizada con resina. No se agrieta, no coge humedad y cada veta es única.", icono: mano }
+      - { titulo: Equilibrio exacto, texto: "El peso cae justo donde apoyas el dedo índice. Menos esfuerzo para la muñeca en cada corte.", icono: balanza }
+    titulo_ficha: Ficha técnica
+    ficha:
+      - { titulo: Longitud de hoja, texto: "21 cm" }
+      - { titulo: Longitud total, texto: "34 cm" }
+      - { titulo: Peso, texto: "215 g" }
+      - { titulo: Acero, texto: "Inoxidable X50CrMoV15" }
+      - { titulo: Dureza, texto: "58 HRC" }
+      - { titulo: Mango, texto: "Olivo y resina" }
+
+  galeria:
+    activa: true
+    antetitulo: De cerca
+    titulo: Mira cada detalle.
+    texto: "Fotos del Tajo 21 recién salido del taller, sin retoques."
+    galeria:
+      - /fotos/galeria-1.jpg
+      - /fotos/galeria-2.jpg
+      - /fotos/galeria-3.jpg
+      - /fotos/galeria-4.jpg
+      - /fotos/galeria-5.jpg
+      - /fotos/galeria-6.jpg
+
+  variantes:
+    activa: true
+    antetitulo: Modelos
+    titulo: Elige el tuyo.
+    texto: "Los tres salen del mismo acero y del mismo taller. Solo cambia la forma de la hoja."
+    cta: { texto: Lo quiero, url: "/#compra" }
+    variantes:
+      - { nombre: "Tajo 21 · Chef", texto: "El todoterreno de la cocina: picar, filetear y trinchar. Hoja de 21 cm.", precio: "149 €", imagen: /fotos/variante-chef.jpg, etiqueta: El más vendido, destacado: true, url: "/#compra" }
+      - { nombre: "Tajo 18 · Santoku", texto: "Hoja de inspiración japonesa de 18 cm, más ancha y ligera. Para verduras y cortes finos.", precio: "139 €", imagen: /fotos/variante-santoku.jpg, etiqueta: "", destacado: false, url: "/#compra" }
+      - { nombre: "Juego Tajo · Tres piezas", texto: "Chef de 21 cm, santoku de 18 cm y puntilla de 9 cm en un estuche de madera de olivo.", precio: "349 €", imagen: /fotos/variante-juego.jpg, etiqueta: Para regalar, destacado: false, url: "/#compra" }
+
+  proceso:
+    activa: true
+    antetitulo: Cómo se usa
+    titulo: Cuatro gestos y listo.
+    texto: "Un buen cuchillo no pide mucho. Con esto te dura toda la vida."
+    imagen: /fotos/proceso.jpg
+    items:
+      - { titulo: Corta sobre madera, texto: "Una tabla de madera o de plástico blando cuida el filo. Nunca sobre cristal ni piedra." }
+      - { titulo: Lávalo a mano, texto: "Agua tibia y jabón, y sécalo enseguida. El lavavajillas estropea el mango y el filo." }
+      - { titulo: Repásalo con la chaira, texto: "Cuatro pasadas por cada lado una vez a la semana y el filo sigue como nuevo." }
+      - { titulo: Afílalo una vez al año, texto: "Mándanoslo y te lo devolvemos afilado en piedra. El primer año, gratis." }
+
+  comparativa:
+    activa: true
+    antetitulo: Comparativa
+    titulo: No es un cuchillo más.
+    texto: "Lo que cambia entre un cuchillo forjado a mano y uno de los de siempre."
+    columna_propia: Tajo 21
+    columna_otros: Cuchillo de serie
+    items:
+      - { titulo: Forjado a mano, propio: "sí", otros: "no" }
+      - { titulo: Dureza del acero, propio: "58 HRC", otros: "52-54 HRC" }
+      - { titulo: Afilado, propio: "15° en piedra", otros: "20° a máquina" }
+      - { titulo: Mango, propio: "Olivo y resina", otros: "Plástico" }
+      - { titulo: Afilado incluido, propio: "sí", otros: "no" }
+      - { titulo: Garantía, propio: "De por vida", otros: "2 años" }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo dicen quienes ya cortan con él.
+    testimonios:
+      - { texto: "Llevo veinte años en cocinas y es el primer cuchillo que me llevo a casa. El filo aguanta semanas de servicio.", autor: Marisa Gálvez, cargo: "Cocinera, Toledo" }
+      - { texto: "Lo compré para regalar y acabé pidiendo otro para mí. Se nota el peso bien repartido desde el primer corte.", autor: Andrés Pulido, cargo: "Cliente de Madrid" }
+      - { texto: "Me lo afilaron al año sin pagar nada y volvió mejor que nuevo. Así da gusto comprar.", autor: Lucía Robledo, cargo: "Cliente de Talavera de la Reina" }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Antes de comprar
+    preguntas:
+      - { pregunta: "¿Cuánto tarda en llegar?", respuesta: "Si lo pides antes de las 13:00, sale del taller ese mismo día y llega en 48 horas a cualquier punto de la Península. A Baleares y Canarias, en cuatro o cinco días." }
+      - { pregunta: "¿Puedo devolverlo si no me convence?", respuesta: "Sí. Tienes 30 días para devolverlo sin dar explicaciones. Te devolvemos el dinero en cuanto nos llega." }
+      - { pregunta: "¿Qué cubre la garantía de por vida?", respuesta: "Cualquier defecto de forja, del acero o del mango. No cubre golpes, caídas ni el lavavajillas." }
+      - { pregunta: "¿Cómo funciona el afilado gratis?", respuesta: "Durante el primer año, nos lo mandas o lo traes al taller y te lo devolvemos afilado en piedra sin coste. Después, el afilado tiene un precio fijo." }
+      - { pregunta: "¿Se puede grabar un nombre en la hoja?", respuesta: "Sí, grabamos a láser hasta 20 letras en la hoja. Pídelo al hacer el pedido o por WhatsApp; tarda un día más." }
+
+  compra:
+    activa: true
+    antetitulo: Disponible ya
+    titulo: Hazte con el tuyo.
+    precio: "149 €"
+    texto: "Forjamos en tandas pequeñas. Si lo pides hoy, sale del taller en 48 horas, afilado y listo para usar."
+    imagen: /fotos/compra.jpg
+    cta: { texto: Comprar en la tienda, url: "https://tienda.forjatajo.es" }
+    cta_secundario: { texto: Pedir por WhatsApp, url: "https://wa.me/34644213790" }
+    nota: "Pago seguro con tarjeta en la tienda. Por WhatsApp también puedes pagar por transferencia o Bizum."
+    items:
+      - { titulo: Envío gratis en 48 horas, icono: caja }
+      - { titulo: 30 días para devolverlo, icono: devolver }
+      - { titulo: Garantía de por vida, icono: escudo }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: ¿Dudas? Pásate por el taller.
+    texto: "Estamos en el casco antiguo de Toledo. Ven a probarlo en mano o escríbenos y te contestamos en el día."

@@ -1,0 +1,47 @@
+---
+// Cómo se usa: banda hueso (los colores invertidos). Con foto, fila 50/50 a sangre: la foto (`imagen`) toca el
+// borde izquierdo y a la derecha van el titular y los pasos (`items[]`: titulo, texto) con números huecos
+// enormes. Sin foto, los pasos van en 2 o 4 columnas a todo el ancho. Sin pasos, solo el titular.
+import { seccion } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const pasos = s ? s.items.filter((p) => p && p.titulo) : [];
+const conFoto = !!s?.imagen;
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-hueso">
+      <div class:list={['grid', { 'lg:grid-cols-2': conFoto }]}>
+        {conFoto && (
+          <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1200} class="aspect-[4/3] w-full object-cover md:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[44rem]" />
+        )}
+        <div class:list={['seccion', conFoto ? 'medio-dcha' : 'contenedor-ancho']}>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+          {pasos.length > 0 && (
+            <ol class:list={['mt-12 grid md:mt-16', { 'md:grid-cols-2 xl:grid-cols-4 md:gap-x-10': !conFoto && pasos.length >= 3, 'md:grid-cols-2 md:gap-x-10': !conFoto && pasos.length === 2 }]}>
+              {pasos.map((p, i) => (
+                <li class="paso grid grid-cols-[4.5rem_1fr] gap-x-5 py-6 md:grid-cols-[6rem_1fr]">
+                  <span class="paso-num hueco" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3 class="text-[1.5rem] md:text-[1.9rem]">{p.titulo}</h3>
+                    {p.texto && <p class="mt-2 opacity-80">{p.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .paso { border-top: 2px solid var(--linea); }
+  .paso-num { font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(3.4rem, 6vw, 5rem); line-height: .85; -webkit-text-stroke-color: var(--c-acento); }
+</style>

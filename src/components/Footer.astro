@@ -1,0 +1,79 @@
+---
+// Pie a todo el ancho en negro: marca y redes, contacto, horario y menú en columnas; debajo, el nombre del
+// negocio gigante en el color de marca y la línea legal. Todo desde site.yaml.
+// «Web creada con NoExpertise» se muestra si site.yaml → marca_pie no es false (plan gratis).
+import { site, tel, mapa, whatsapp } from '../data/site';
+import Icono from './ui/Icono.astro';
+interface Props { variante?: string }
+const { variante = 'lanzamiento' } = Astro.props;
+const c = site.contacto;
+const redes = Object.entries(site.redes).filter(([, url]) => url);
+const anio = new Date().getFullYear();
+// El nombre gigante del pie llena el ancho sea cual sea su longitud.
+const tamGigante = `font-size:min(24rem, ${(158 / Math.max(site.nombre.length, 4)).toFixed(2)}vw)`;
+---
+
+<footer class={`pie pie--${variante}`}>
+  <div class="contenedor pie-rejilla">
+    <div class="pie-marca">
+      <p class="pie-nombre">{site.nombre}</p>
+      {site.eslogan && <p class="pie-eslogan">{site.eslogan}</p>}
+      {
+        redes.length > 0 && (
+          <ul class="pie-redes">
+            {redes.map(([red, url]) => (
+              <li>
+                <a href={url} rel="noopener" target="_blank" aria-label={red} class="grid h-11 w-11 place-items-center border-2 border-current">
+                  <Icono nombre={red} tam={20} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+    {
+      (c.telefono || c.email || c.whatsapp || c.direccion) && (
+        <div>
+          <p class="pie-titulo">Contacto</p>
+          <ul class="pie-lista">
+            {c.telefono && <li><a href={tel(c.telefono)}>{c.telefono}</a></li>}
+            {c.whatsapp && <li><a href={whatsapp(c.whatsapp)} rel="noopener" target="_blank">WhatsApp</a></li>}
+            {c.email && <li><a class="break-all" href={`mailto:${c.email}`}>{c.email}</a></li>}
+            {c.direccion && <li><a href={mapa(c.direccion)} rel="noopener" target="_blank">{c.direccion}</a></li>}
+          </ul>
+        </div>
+      )
+    }
+    {
+      c.horario && (
+        <div>
+          <p class="pie-titulo">Horario</p>
+          <p class="pie-lista">{c.horario}</p>
+        </div>
+      )
+    }
+    {
+      site.menu.length > 0 && (
+        <div>
+          <p class="pie-titulo">Web</p>
+          <ul class="pie-lista">
+            {site.menu.map((e) => <li><a href={e.url}>{e.texto}</a></li>)}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+  <p class="pie-gigante" style={tamGigante} aria-hidden="true">{site.nombre}</p>
+  <div class="contenedor pie-legal">
+    <span>© {anio} {site.nombre}</span>
+    <a href="/aviso-legal">Aviso legal y privacidad</a>
+    {
+      site.marca_pie && (
+        <span class="pie-noexpertise">
+          Web creada con <a href="https://noexpertise.com" rel="noopener">NoExpertise</a>
+        </span>
+      )
+    }
+  </div>
+</footer>

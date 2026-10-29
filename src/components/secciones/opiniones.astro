@@ -1,0 +1,59 @@
+---
+// Opiniones: banda hueso con el titular a todo el ancho y las opiniones (`testimonios[]`: texto, autor, cargo)
+// en columnas altas separadas por líneas verticales, cada una con una comilla enorme en el acento. Con una
+// sola opinión, sale como cita grande. Sin opiniones no se pinta.
+import { seccion } from '../../data/site';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const ops = s ? s.testimonios.filter((t) => t && t.texto) : [];
+const n = ops.length;
+const columnas = n >= 3 ? 'md:grid-cols-2 lg:grid-cols-3' : n === 2 ? 'md:grid-cols-2' : '';
+---
+
+{
+  s && n > 0 && (
+    <section id={Astro.props.id} class="banda-hueso">
+      <div class="contenedor-ancho seccion">
+        <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+          <div class="lg:col-span-8">
+            {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+            {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          </div>
+          {s.texto && <p class="text-lg opacity-80 lg:col-span-4 md:text-xl">{s.texto}</p>}
+        </div>
+        <ul class:list={['opiniones mt-14 grid md:mt-20', columnas]}>
+          {ops.map((t) => (
+            <li class="opinion flex flex-col">
+              <span class="opinion-comilla" aria-hidden="true">“</span>
+              <blockquote class:list={['opinion-texto', { 'opinion-texto--sola': n === 1 }]}>{t.texto}</blockquote>
+              {t.autor && (
+                <p class="mt-auto pt-8">
+                  <span class="block font-bold">{t.autor}</span>
+                  {t.cargo && <span class="mono block text-sm opacity-70">{t.cargo}</span>}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .opiniones { border-top: 2px solid currentColor; }
+  .opinion { padding: 2rem 0 2.5rem; border-bottom: 1px solid var(--linea); }
+  @media (min-width: 768px) {
+    .opinion { padding: 2.5rem 2.5rem 3rem 0; border-bottom: 0; }
+    .opinion + .opinion { padding-left: 2.5rem; border-left: 1px solid var(--linea); }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .opiniones.md\:grid-cols-2.lg\:grid-cols-3 .opinion:nth-child(odd) { padding-left: 0; border-left: 0; }
+  }
+  @media (min-width: 1024px) {
+    .opiniones.lg\:grid-cols-3 .opinion:nth-child(3n + 1) { padding-left: 0; border-left: 0; }
+  }
+  .opinion-comilla { font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 7rem; line-height: .7; height: 3.4rem; color: var(--c-acento); }
+  .opinion-texto { font-size: clamp(1.2rem, 1.9vw, 1.5rem); font-weight: 650; line-height: 1.35; margin-top: 1rem; }
+  .opinion-texto--sola { font-family: var(--fuente-titulos); font-weight: 900; text-transform: uppercase; font-size: clamp(1.8rem, 4.4vw, 4rem); line-height: 1; }
+</style>

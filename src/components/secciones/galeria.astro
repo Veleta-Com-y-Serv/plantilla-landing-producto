@@ -1,0 +1,47 @@
+---
+// Galería a borde completo: titular en una franja negra y, debajo, un mosaico de fotos de borde a borde de la
+// ventana, sin márgenes (solo una línea de 3 px entre fotos). Por cada seis fotos: una grande de 2×2, dos
+// pequeñas y tres anchas; el resto se encaja para que no queden huecos. Campos: `galeria[]` (rutas).
+// Sin fotos no se pinta.
+import { seccion } from '../../data/site';
+import { altGaleria } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const fotos = s ? s.galeria.filter(Boolean) : [];
+
+// Forma de cada foto (columnas de 2 en móvil y de 4 desde 768 px): sin huecos con cualquier número de fotos.
+const GRANDE = 'col-span-2 row-span-2', ANCHA = 'col-span-2', ENTERA = 'col-span-2 md:col-span-4', NORMAL = '';
+const GRUPO = [GRANDE, NORMAL, NORMAL, ANCHA, ANCHA, ANCHA];
+const RESTO: Record<number, string[]> = { 1: [ENTERA], 2: [ANCHA, ANCHA], 3: [ANCHA, NORMAL, NORMAL], 4: [NORMAL, NORMAL, NORMAL, NORMAL], 5: [GRANDE, NORMAL, NORMAL, NORMAL, NORMAL] };
+const completas = Math.floor(fotos.length / 6) * 6;
+const formas = fotos.map((_, i) => (i < completas ? GRUPO[i % 6] : RESTO[fotos.length - completas][i - completas]));
+---
+
+{
+  s && fotos.length > 0 && (
+    <section id={Astro.props.id} class="banda-negra">
+      {(s.antetitulo || s.titulo || s.texto) && (
+        <div class="contenedor-ancho flex flex-wrap items-end justify-between gap-x-12 gap-y-6 py-14 md:py-20">
+          <div>
+            {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+            {s.titulo && <h2 class="titulo-medio mt-4">{s.titulo}</h2>}
+          </div>
+          {s.texto && <p class="max-w-md text-lg opacity-80">{s.texto}</p>}
+        </div>
+      )}
+      <ul class="mosaico grid grid-cols-2 md:grid-cols-4">
+        {fotos.map((f, i) => (
+          <li class:list={['overflow-hidden', formas[i]]}>
+            <Imagen src={f} alt={altGaleria(i)} ancho={1000} alto={1000} class="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]" />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .mosaico { gap: 3px; background: var(--c-fondo); grid-auto-rows: 50vw; }
+  @media (min-width: 768px) { .mosaico { grid-auto-rows: min(25vw, 30rem); } }
+</style>

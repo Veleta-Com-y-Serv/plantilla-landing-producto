@@ -1,0 +1,72 @@
+---
+// Modelos y precios: banda de color pleno a todo el ancho. Los modelos (`variantes[]`: nombre, texto, precio,
+// imagen, etiqueta, destacado, url) van en columnas pegadas separadas por líneas, que llenan el ancho; el
+// destacado sale en negro. Cada uno lleva su botón: a su `url` si la tiene; si no, al botón de la sección (`cta`)
+// o, a falta de él, al WhatsApp del negocio. Sin precio no hay precio; sin modelos no se pinta.
+import { seccion, site, campo, externo, whatsapp } from '../../data/site';
+import { altFicha } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const modelos = s ? s.variantes.filter((v) => v && v.nombre) : [];
+const n = modelos.length;
+const columnas = n >= 4 ? 'md:grid-cols-2 xl:grid-cols-4' : n === 3 ? 'lg:grid-cols-3' : n === 2 ? 'md:grid-cols-2' : '';
+// Cuando un modelo ocupa toda la fila en tableta (o hay uno solo), foto y texto van lado a lado.
+const enFila = n === 1 ? { li: 'md:flex-row', foto: 'md:w-1/2 md:aspect-auto' } : n === 3 ? { li: 'md:max-lg:flex-row', foto: 'md:max-lg:w-1/2 md:max-lg:aspect-auto' } : { li: '', foto: '' };
+const destino = (url?: string, nombre = '') =>
+  campo(url) || campo(s?.cta?.url) || whatsapp(site.contacto.whatsapp, nombre ? `Hola, me interesa ${nombre}` : '');
+const textoBoton = (nombre: string) => campo(s?.cta?.texto) || nombre;
+---
+
+{
+  s && n > 0 && (
+    <section id={Astro.props.id} class="banda-color">
+      <div class="contenedor-ancho seccion">
+        {(s.antetitulo || s.titulo || s.texto) && (
+          <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+            <div class="lg:col-span-8">
+              {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+              {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+            </div>
+            {s.texto && <p class="text-lg font-medium opacity-85 lg:col-span-4 md:text-xl">{s.texto}</p>}
+          </div>
+        )}
+        <ul class:list={['modelos mt-14 grid md:mt-20', columnas]}>
+          {modelos.map((v) => {
+            const url = destino(v.url, v.nombre);
+            return (
+              <li class:list={['modelo flex flex-col', enFila.li, { 'banda-negra': v.destacado === true }]}>
+                {v.imagen && <Imagen src={v.imagen} alt={altFicha(v)} ancho={900} alto={675} class:list={['aspect-[4/3] w-full object-cover', enFila.foto]} />}
+                <div class="flex flex-1 flex-col p-6 md:p-8">
+                  {campo(v.etiqueta) && <p class="modelo-etiqueta mono">{v.etiqueta}</p>}
+                  <h3 class="mt-4 text-[1.9rem] md:text-[2.3rem]">{v.nombre}</h3>
+                  {v.texto && <p class="mt-4 opacity-85">{v.texto}</p>}
+                  <div class="mt-auto pt-8">
+                    {campo(v.precio) && <p class="modelo-precio">{v.precio}</p>}
+                    {url && (
+                      <a class="btn mt-6 w-full" href={url} {...(externo(url) ? { rel: 'noopener', target: '_blank' } : {})}>
+                        {textoBoton(v.nombre)}<span class="btn-flecha" aria-hidden="true">→</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  /* Líneas compartidas entre columnas: cada modelo tiene borde y se monta 2 px sobre el de al lado */
+  .modelos { padding: 0 2px 2px 0; }
+  .modelo { border: 2px solid var(--c-sobre-primario); margin: 0 -2px -2px 0; }
+  .modelo.banda-negra { border-color: var(--c-sobre-primario); }
+  .modelo-etiqueta { display: inline-block; align-self: flex-start; padding: .35rem .7rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; background: var(--c-sobre-primario); color: var(--c-primario); }
+  .modelo.banda-negra .modelo-etiqueta { background: var(--c-primario); color: var(--c-sobre-primario); }
+  .modelo-precio { font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(2.8rem, 5vw, 4.25rem); line-height: .9; letter-spacing: -0.02em; }
+  .modelo.banda-negra .btn { background: var(--c-primario); color: var(--c-sobre-primario); border-color: var(--c-primario); }
+  .modelo.banda-negra .btn:hover { background: transparent; color: var(--c-primario); border-color: var(--c-primario); }
+</style>

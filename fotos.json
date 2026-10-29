@@ -1,15 +1,67 @@
 [
-  { "fichero": "fotos/hero.jpg", "aspecto": "16:9", "prompt": "Cuchillo de chef forjado con hoja de acero satinado y mango de madera de olivo, apoyado en diagonal sobre una losa de pizarra negra, luz lateral dura de estudio que saca un brillo en el filo, fondo negro profundo con mucho espacio vacío a la izquierda, fotografía de producto publicitaria, sin personas, sin texto ni marcas grabadas" },
-  { "fichero": "fotos/detalle-hoja.jpg", "aspecto": "4:3", "prompt": "Macro del filo de un cuchillo de cocina de acero inoxidable con el patrón del afilado a mano visible, gotas de agua sobre la hoja, fondo oscuro desenfocado, luz fría lateral, fotografía de producto de detalle, sin texto ni logotipos" },
-  { "fichero": "fotos/galeria-1.jpg", "aspecto": "1:1", "prompt": "Cuchillo de chef con mango de olivo visto desde arriba sobre una tabla de madera de nogal con perejil fresco picado al lado, luz natural de ventana, sombras suaves, fotografía cenital, sin personas, sin texto" },
-  { "fichero": "fotos/galeria-2.jpg", "aspecto": "1:1", "prompt": "Primer plano del mango de un cuchillo de madera de olivo con vetas marcadas y remaches de acero, fondo negro, luz cálida rasante, fotografía de detalle, sin texto ni logotipos" },
-  { "fichero": "fotos/galeria-3.jpg", "aspecto": "1:1", "prompt": "Pieza de acero al rojo vivo sobre un yunque en un taller de forja tradicional en penumbra, chispas en el aire, herramientas de herrero desenfocadas al fondo, sin personas visibles, sin texto" },
-  { "fichero": "fotos/galeria-4.jpg", "aspecto": "16:9", "prompt": "Tomate maduro cortado en rodajas finísimas junto a un cuchillo de chef de acero apoyado en una tabla de madera, encimera de mármol oscuro, luz natural lateral, fotografía gastronómica, sin personas, sin texto" },
-  { "fichero": "fotos/galeria-5.jpg", "aspecto": "16:9", "prompt": "Banco de trabajo de un taller artesano de cuchillos con hojas de acero sin terminar alineadas, piedras de afilar al agua y virutas de madera de olivo, luz de tarde entrando por una ventana, sin personas, sin rótulos ni texto" },
-  { "fichero": "fotos/galeria-6.jpg", "aspecto": "16:9", "prompt": "Cuchillo de chef dentro de un estuche abierto de madera de olivo con interior de fieltro negro, visto en ángulo sobre fondo gris oscuro, luz suave de estudio, fotografía de producto para regalo, sin texto ni logotipos" },
-  { "fichero": "fotos/variante-chef.jpg", "aspecto": "4:3", "prompt": "Cuchillo de chef de 21 centímetros con hoja de acero satinado y mango de olivo, de perfil y en horizontal sobre fondo gris claro liso, sombra suave debajo, fotografía de catálogo de producto, sin texto ni logotipos" },
-  { "fichero": "fotos/variante-santoku.jpg", "aspecto": "4:3", "prompt": "Cuchillo santoku de hoja ancha con alveolos y mango de madera de olivo, de perfil y en horizontal sobre fondo gris claro liso, sombra suave debajo, fotografía de catálogo de producto, sin texto ni logotipos" },
-  { "fichero": "fotos/variante-juego.jpg", "aspecto": "4:3", "prompt": "Juego de tres cuchillos de cocina con mango de olivo, de mayor a menor, colocados en paralelo sobre fondo gris claro liso, vistos desde arriba, fotografía de catálogo de producto, sin texto ni logotipos" },
-  { "fichero": "fotos/proceso.jpg", "aspecto": "1:1", "prompt": "Manos sin cara visible picando cebolla con un cuchillo de chef sobre una tabla de madera en una cocina doméstica luminosa, encuadre cerrado en las manos y la tabla, luz natural de mañana, sin texto ni logotipos" },
-  { "fichero": "fotos/compra.jpg", "aspecto": "1:1", "prompt": "Cuchillo de chef con mango de olivo suspendido en vertical sobre un fondo negro liso, con un reflejo limpio en la hoja de acero, luz de estudio dramática, fotografía de producto publicitaria, sin personas, sin texto ni logotipos" }
+ {
+  "fichero": "fotos/hero.jpg",
+  "aspecto": "16:9",
+  "prompt": "Cuchillo de chef forjado con hoja de acero satinado y mango de madera de olivo, apoyado en diagonal sobre una losa de pizarra negra, luz lateral dura de estudio que saca un brillo en el filo, fondo negro profundo con mucho espacio vacío a la izquierda, fotografía de producto publicitaria, sin personas, sin texto ni marcas grabadas"
+ },
+ {
+  "fichero": "fotos/detalle-hoja.jpg",
+  "aspecto": "4:3",
+  "prompt": "Macro del filo de un cuchillo de cocina de acero inoxidable con el patrón del afilado a mano visible, gotas de agua sobre la hoja, fondo oscuro desenfocado, luz fría lateral, fotografía de producto de detalle, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/galeria-1.jpg",
+  "aspecto": "1:1",
+  "prompt": "Cuchillo de chef con mango de olivo visto desde arriba sobre una tabla de madera de nogal con perejil fresco picado al lado, luz natural de ventana, sombras suaves, tabla que ocupa todo el encuadre sin bordes ni mármol visible, fotografía cenital, sin personas, sin texto, hoja completamente lisa y pulida como un espejo, sin ningún grabado, sello, número ni inscripción en el acero"
+ },
+ {
+  "fichero": "fotos/galeria-2.jpg",
+  "aspecto": "1:1",
+  "prompt": "Primer plano del mango de un cuchillo de madera de olivo con vetas marcadas y remaches de acero, fondo negro, luz cálida rasante, fotografía de detalle, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/galeria-3.jpg",
+  "aspecto": "1:1",
+  "prompt": "Pieza de acero al rojo vivo sobre un yunque en un taller de forja tradicional en penumbra, chispas en el aire, herramientas de herrero desenfocadas al fondo, sin personas visibles, sin texto"
+ },
+ {
+  "fichero": "fotos/galeria-4.jpg",
+  "aspecto": "16:9",
+  "prompt": "Tomate maduro cortado en rodajas finísimas junto a un cuchillo de chef de acero apoyado en una tabla de madera, encimera de mármol oscuro, luz natural lateral, fotografía gastronómica, sin personas, sin texto"
+ },
+ {
+  "fichero": "fotos/galeria-5.jpg",
+  "aspecto": "16:9",
+  "prompt": "Banco de trabajo de un taller artesano de cuchillos con hojas de acero sin terminar alineadas, piedras de afilar al agua y virutas de madera de olivo, luz de tarde entrando por una ventana, sin personas, sin rótulos ni texto, sin botes, frascos ni etiquetas sobre el banco"
+ },
+ {
+  "fichero": "fotos/galeria-6.jpg",
+  "aspecto": "16:9",
+  "prompt": "Estuche de madera de olivo abierto con un cuchillo de chef de hoja totalmente lisa y limpia, sin marcas, sin sellos y sin símbolos en el acero, sobre fieltro negro, visto desde arriba en ángulo sobre fondo gris oscuro, luz suave de estudio, fotografía de producto para regalo, sin texto"
+ },
+ {
+  "fichero": "fotos/variante-chef.jpg",
+  "aspecto": "4:3",
+  "prompt": "Cuchillo de chef de 21 centímetros con hoja de acero satinado y mango de olivo, de perfil y en horizontal sobre fondo gris claro liso, sombra suave debajo, fotografía de catálogo de producto, sin texto ni logotipos, hoja completamente lisa y pulida como un espejo, sin ningún grabado, sello, número ni inscripción en el acero"
+ },
+ {
+  "fichero": "fotos/variante-santoku.jpg",
+  "aspecto": "4:3",
+  "prompt": "Cuchillo santoku de hoja ancha con alveolos y mango de madera de olivo, de perfil y en horizontal sobre fondo gris claro liso, sombra suave debajo, fotografía de catálogo de producto, sin texto ni logotipos, hoja completamente lisa y pulida como un espejo, sin ningún grabado, sello, número ni inscripción en el acero"
+ },
+ {
+  "fichero": "fotos/variante-juego.jpg",
+  "aspecto": "4:3",
+  "prompt": "Juego de tres cuchillos de cocina con mango de olivo, de mayor a menor, colocados en paralelo sobre fondo gris claro liso, vistos desde arriba, fotografía de catálogo de producto, sin texto ni logotipos, hoja completamente lisa y pulida como un espejo, sin ningún grabado, sello, número ni inscripción en el acero"
+ },
+ {
+  "fichero": "fotos/proceso.jpg",
+  "aspecto": "1:1",
+  "prompt": "Manos sin cara visible picando cebolla con un cuchillo de chef sobre una tabla de madera en una cocina doméstica luminosa, encuadre cerrado en las manos y la tabla, luz natural de mañana, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/compra.jpg",
+  "aspecto": "1:1",
+  "prompt": "Cuchillo de chef con mango de olivo suspendido en vertical sobre un fondo negro liso, con un reflejo limpio en la hoja de acero, luz de estudio dramática, fotografía de producto publicitaria, sin personas, sin texto ni logotipos, hoja completamente lisa y pulida como un espejo, sin ningún grabado, sello, número ni inscripción en el acero"
+ }
 ]

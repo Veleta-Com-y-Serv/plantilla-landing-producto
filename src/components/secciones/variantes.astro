@@ -3,8 +3,11 @@
 // imagen, etiqueta, destacado, url) van en columnas pegadas separadas por líneas, que llenan el ancho; el
 // destacado sale en negro. Cada uno lleva su botón: a su `url` si la tiene; si no, al botón de la sección (`cta`)
 // o, a falta de él, al WhatsApp del negocio. Sin precio no hay precio; sin modelos no se pinta.
+// Los modelos con `detalle` tienen página propia (/variantes/<modelo>/): el nombre enlaza a ella y la tarjeta lo muestra.
 import { seccion, site, campo, externo, whatsapp } from '../../data/site';
 import { altFicha } from '../../lib/seo';
+import { enlaceDe } from '../../lib/paginas';
+import Icono from '../ui/Icono.astro';
 import Imagen from '../ui/Imagen.astro';
 interface Props { id: string }
 const s = seccion(Astro.props.id);
@@ -35,16 +38,17 @@ const textoBoton = (nombre: string) => campo(s?.cta?.texto) || nombre;
           {modelos.map((v) => {
             const url = destino(v.url, v.nombre);
             return (
-              <li class:list={['modelo flex flex-col', enFila.li, { 'banda-negra': v.destacado === true }]}>
+              <li class:list={['modelo relative flex flex-col', enFila.li, { 'banda-negra': v.destacado === true }]}>
                 {v.imagen && <Imagen src={v.imagen} alt={altFicha(v)} ancho={900} alto={675} class:list={['aspect-[4/3] w-full object-cover', enFila.foto]} />}
                 <div class="flex flex-1 flex-col p-6 md:p-8">
                   {campo(v.etiqueta) && <p class="modelo-etiqueta mono">{v.etiqueta}</p>}
-                  <h3 class="mt-4 text-[1.9rem] md:text-[2.3rem]">{v.nombre}</h3>
+                  <h3 class="mt-4 text-[1.9rem] md:text-[2.3rem]">{enlaceDe(v) ? <a href={enlaceDe(v)} class="modelo-enlace">{v.nombre}</a> : v.nombre}</h3>
                   {v.texto && <p class="mt-4 opacity-85">{v.texto}</p>}
+                  {enlaceDe(v) && <span class="modelo-ver mono" aria-hidden="true">Ver más <Icono nombre="flecha" tam={16} /></span>}
                   <div class="mt-auto pt-8">
                     {campo(v.precio) && <p class="modelo-precio">{v.precio}</p>}
                     {url && (
-                      <a class="btn mt-6 w-full" href={url} {...(externo(url) ? { rel: 'noopener', target: '_blank' } : {})}>
+                      <a class="btn relative z-10 mt-6 w-full" href={url} {...(externo(url) ? { rel: 'noopener', target: '_blank' } : {})}>
                         {textoBoton(v.nombre)}<span class="btn-flecha" aria-hidden="true">→</span>
                       </a>
                     )}
@@ -64,6 +68,12 @@ const textoBoton = (nombre: string) => campo(s?.cta?.texto) || nombre;
   .modelos { padding: 0 2px 2px 0; }
   .modelo { border: 2px solid var(--c-sobre-primario); margin: 0 -2px -2px 0; }
   .modelo.banda-negra { border-color: var(--c-sobre-primario); }
+  .modelo-enlace { text-decoration: none; }
+  .modelo-enlace::after { content: ""; position: absolute; inset: 0; }
+  .modelo-enlace:focus-visible { outline: none; }
+  .modelo:has(.modelo-enlace:focus-visible) { outline: 3px solid currentColor; outline-offset: -6px; }
+  .modelo-ver { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.25rem; font-size: .8rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .modelo:hover .modelo-ver { text-decoration: underline; }
   .modelo-etiqueta { display: inline-block; align-self: flex-start; padding: .35rem .7rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; background: var(--c-sobre-primario); color: var(--c-primario); }
   .modelo.banda-negra .modelo-etiqueta { background: var(--c-primario); color: var(--c-sobre-primario); }
   .modelo-precio { font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(2.8rem, 5vw, 4.25rem); line-height: .9; letter-spacing: -0.02em; }

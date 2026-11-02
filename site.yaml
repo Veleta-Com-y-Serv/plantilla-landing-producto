@@ -93,9 +93,72 @@ secciones:
     texto: "Los tres salen del mismo acero y del mismo taller. Solo cambia la forma de la hoja."
     cta: { texto: Lo quiero, url: "/#compra" }
     variantes:
-      - { nombre: "Tajo 21 · Chef", texto: "El todoterreno de la cocina: picar, filetear y trinchar. Hoja de 21 cm.", precio: "149 €", imagen: /fotos/variante-chef.jpg, etiqueta: El más vendido, destacado: true, url: "/#compra" }
-      - { nombre: "Tajo 18 · Santoku", texto: "Hoja de inspiración japonesa de 18 cm, más ancha y ligera. Para verduras y cortes finos.", precio: "139 €", imagen: /fotos/variante-santoku.jpg, etiqueta: "", destacado: false, url: "/#compra" }
-      - { nombre: "Juego Tajo · Tres piezas", texto: "Chef de 21 cm, santoku de 18 cm y puntilla de 9 cm en un estuche de madera de olivo.", precio: "349 €", imagen: /fotos/variante-juego.jpg, etiqueta: Para regalar, destacado: false, url: "/#compra" }
+      - nombre: "Tajo 21 · Chef"
+        texto: "El todoterreno de la cocina: picar, filetear y trinchar. Hoja de 21 cm."
+        precio: "149 €"
+        imagen: /fotos/variante-chef.jpg
+        imagenes: "/fotos/detalle-hoja.jpg; /fotos/galeria-1.jpg"
+        etiqueta: El más vendido
+        destacado: true
+        url: "/#compra"
+        detalle: |
+          El Tajo 21 es el cuchillo que se queda siempre sobre la tabla. Su hoja de 21 cm tiene el vientre justo para
+          mecer el filo al picar hierbas y la punta suficiente para filetear pescado o deshuesar un pollo sin esfuerzo.
+
+          Sale del mismo acero inoxidable forjado y templado a mano que el resto de la familia, y pasa por las manos de
+          tres artesanos en el taller de Toledo antes de llegar a la tuya. El filo se afila en piedra al agua a 15 grados,
+          con un corte limpio que no aplasta el tomate ni desgarra la cebolla.
+
+          El mango de olivo está estabilizado con resina, de modo que no se agrieta ni coge humedad, y cada pieza tiene su
+          propia veta. El peso cae justo donde apoyas el dedo índice, así que el cuchillo trabaja contigo y la muñeca
+          lo agradece después de una sesión larga de cocina.
+
+          Es el que recomendamos si solo vas a tener un cuchillo en casa. Incluye el afilado gratis el primer año y la
+          garantía de por vida, como todos los nuestros.
+      - nombre: "Tajo 18 · Santoku"
+        texto: "Hoja de inspiración japonesa de 18 cm, más ancha y ligera. Para verduras y cortes finos."
+        precio: "139 €"
+        imagen: /fotos/variante-santoku.jpg
+        imagenes: "/fotos/galeria-2.jpg; /fotos/galeria-3.jpg"
+        etiqueta: ""
+        destacado: false
+        url: "/#compra"
+        detalle: |
+          El Tajo 18 toma la silueta del santoku japonés: una hoja de 18 cm, ancha, de lomo recto y punta redondeada. Es
+          más corta y ligera que el chef, y eso se nota en cuanto empiezas a cortar verdura en cantidad.
+
+          Su anchura te deja apoyar los nudillos sin miedo, deslizar los alimentos con el plano de la hoja y pasar de la
+          tabla a la sartén de un solo gesto. Va muy bien para láminas finas de cebolla, calabacín o pepino, para picar
+          hierbas y para cortar pescado crudo con limpieza.
+
+          Está hecho con el mismo acero forjado y templado a mano que el resto de la familia, afilado en piedra al agua a
+          15 grados, y con el mango de olivo estabilizado que hace única cada pieza. El equilibrio es algo más adelantado
+          que en el chef, pensado para una mano que corta con ritmo y sin prisa.
+
+          Es una buena elección si cocinas sobre todo verduras, si tienes la mano pequeña o si prefieres un cuchillo ágil
+          antes que contundente. Lleva el afilado gratis el primer año y la garantía de por vida.
+      - nombre: "Juego Tajo · Tres piezas"
+        texto: "Chef de 21 cm, santoku de 18 cm y puntilla de 9 cm en un estuche de madera de olivo."
+        precio: "349 €"
+        imagen: /fotos/variante-juego.jpg
+        imagenes: "/fotos/galeria-4.jpg; /fotos/galeria-5.jpg"
+        etiqueta: Para regalar
+        destacado: false
+        url: "/#compra"
+        detalle: |
+          El Juego Tajo reúne en un mismo estuche de madera de olivo los tres cuchillos con los que se resuelve casi
+          cualquier cocina: el chef de 21 cm, el santoku de 18 cm y una puntilla de 9 cm.
+
+          El chef se encarga de lo grande, el santoku de las verduras y los cortes finos, y la puntilla de lo delicado:
+          pelar, desvenar, sacar los ojos a una patata o cortar una fruta en la mano. Los tres salen del mismo taller de
+          Toledo, del mismo acero forjado a mano y con el mismo mango de olivo, de forma que se ven y se sienten como una
+          sola familia.
+
+          El estuche los guarda protegidos, con cada hoja en su sitio, y luce bien en la encimera. Por eso es el que más
+          se pide para regalar: una boda, una casa nueva o ese cumpleaños importante.
+
+          Cada pieza se afila en piedra antes de salir y todas tienen garantía de por vida. El primer afilado de los tres
+          es gratis, y llega en un envío de 48 horas.
 
   proceso:
     activa: true
